@@ -1,7 +1,7 @@
 # Hello Hackers
 
 ## Intro To Commands
-We had to use hello command in the following challenge
+Invoke the hello command to get the flag! Keep in mind: commands in Linux are case sensitive: hello is different from HELLO.
 
 ### Solve
 **Flag:** `pwn.college{Ead7X6t_UmfRmi2ngdj1c_Qpr8R.QX3YjM1wyM3kjNzEzW}`
@@ -12,31 +12,34 @@ pwn.college{Ead7X6t_UmfRmi2ngdj1c_Qpr8R.QX3YjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-The use of a command
+The use of a commands
 
 ### References 
 None
 
+---
+
 ## Intro to Arguments
-We had to use argument for a command in the following challenge
+In this challenge, to get the flag, you must run the hello command (NOT the echo command) with a single argument of hackers.
 
 ### Solve
 **Flag:** `pwn.college{ADmX0Blf_xgK3QmLLUFvwkoTtu2.QX4YjM1wyM3kjNzEzW}`
  
-
 ```bash
 command hello hackers
 pwn.college{ADmX0Blf_xgK3QmLLUFvwkoTtu2.QX4YjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-The use of a command
+The use of a command and arguments 
 
 ### References 
 None
 
+---
+
 ## Command History
-Controlling terminal history
+You can scroll through those saved commands with the up/down arrow keys, and we'll practice that in this challenge. This challenge will inject the flag into your history. Bring up a terminal, hit the up arrow, and grab it! In other challenges, the history will contain the log of the commands you've run, so if you need to run a similar command again, you can use the arrow keys to scroll through and find it!
 
 ### Solve
 **Flag:** `pwn.college{Ead7X6t_UmfRmi2ngdj1c_Qpr8R.QX3YjM1wyM3kjNzEzW}`
