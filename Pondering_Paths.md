@@ -14,14 +14,16 @@ pwn.college{ANqONht6ClS4bWI68ywT-tRTIXd.QX4cTO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-We used the absolute path to run a file
+- Absolute paths start from the root directory (/) and provide the complete path to a file
+- Commands can be executed using their absolute path from any location
+- Absolute paths are unambiguous and always point to the same location regardless of current directory
 
 ### References 
 None
 
 ---
 
-## Program and absolute paths
+## Program And Absolute Paths
 This challenge again required us to execute it by invoking its absolute path. We would have to execute the run file that is in the challenge directory that is, in turn, in the / directory
 
 ### Solution
@@ -33,14 +35,17 @@ pwn.college{wJP8IujEZiTfQGMEHWmhneUruZr.QX1QTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-/ is used to tell the root directory in linux... everything in linux starts from / as it is the parent of all directories
+- The root directory (/) is the top-level directory in Linux filesystem hierarchy
+- All files and directories in Linux are contained within the root directory
+- Absolute paths always begin with / to indicate they start from the root
+- The `/challenge/run` command demonstrates executing programs via absolute paths
 
 ### References 
 None
 
 ---
 
-## Position thy self
+## Position Thy Self
 This challenge will required us to execute the /challenge/run program from a specific path. We had to cd to that directory before rerunning the challenge program
 
 ### Solution
@@ -54,14 +59,17 @@ pwn.college{U2ZXDI2BsJwj9kMZNCKrryAxr5J.QX2QTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-cd is used to change directory 
+- `cd` (change directory) command is used to navigate between directories
+- Current working directory affects how relative paths are interpreted
+- Some programs may require execution from specific directories
+- Syntax: `cd /path/to/directory` to change to a specific location
 
 ### References 
 None
 
 ---
 
-## Position elsewhere
+## Position Elsewhere
 This challenge required us to execute the /challenge/run program from a specific path. We had to cd to that directory before rerunning the challenge program.
 
 ### Solution
@@ -75,16 +83,17 @@ pwn.college{Arewe6ZoipdT1gG5a-76f0_mSpP.QX3QTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-cd is used to change directory 
-
-Similar to __position_thy_self__
+- Reinforces the concept of changing directories with `cd`
+- Demonstrates that different challenges may require execution from different paths
+- Working directory context is crucial for proper program execution
+- Similar pattern to Position Thy Self challenge
 
 ### References 
 None
 
 ---
 
-## Position yet elsewhere
+## Position Yet Elsewhere
 This challenge required us to execute the /challenge/run program from a specific path. We had to cd to that directory before rerunning the challenge program.
 
 
@@ -99,16 +108,17 @@ pwn.college{EGxO8c-T0XSlE9Jaq5XmKGDrKAx.QX4QTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-cd is used to change directory 
-
-Similar to __position_thy_self__ and __position_elsewhere__
+- Continues the pattern of directory-dependent program execution
+- Reinforces navigation skills with `cd` command
+- Shows consistency in challenge structure and requirements
+- Builds familiarity with changing working directories for different tasks
 
 ### References 
 None
 
 ---
 
-## implicit relative paths, from /
+## Implicit Relative Paths, From /
 We need to run /challenge/run using a relative path while having a current working directory of /
 
 ### Solution
@@ -121,14 +131,17 @@ pwn.college{k4ME7s7RozotXz4EGgtlSX_WaBI.QX5QTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-We need not specify / before a relative path i.e. to execute something from current working directory
+- Relative paths do not start with / and are interpreted relative to current directory
+- When in root directory (/), `challenge/run` is equivalent to `/challenge/run`
+- Relative paths provide flexibility and context-dependent navigation
+- Understanding the difference between absolute and relative path notation
 
 ### References 
 None
 
 ---
 
-## explicit relative paths, from /
+## Explicit Relative Paths, From /
 To run /challenge/run using relative path in a specific directory
 
 ### Solution
@@ -141,14 +154,17 @@ pwn.college{o98epbraDrKXVfYwQ8nEo62-80f.QXwUTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-./challenge means to run it in the current working directory. Where absolute needs the full path from the beginning for relative we can just begin from anywhere and continue further... via ./ which translates to from here.....
+- The `.` symbol represents the current directory in relative paths
+- `./challenge/run` explicitly indicates execution from current directory
+- Explicit relative paths with `./` are clearer and more precise than implicit paths
+- This notation distinguishes between system commands and local executables
 
 ### References 
 None
 
 ---
 
-## implicit relative path
+## Implicit Relative Path
 In this challenge, we'll learn how to explicitly use relative paths to launch run in this scenario. The way to do this is to tell Linux that you explicitly want to execute a program in the current directory, using . like in the previous levels.
 
 ### Solution
@@ -161,14 +177,17 @@ pwn.college{4vFQNkOvl-GO4_rwopzh5caoF6p.QXxUTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-We should use ./run even to run files as a security measure in order not to get confused in file names to be run and system commands... 
+- Using `./` prefix prevents confusion between local executables and system commands
+- Security best practice to explicitly specify current directory execution
+- Avoids potential conflicts with commands in system PATH
+- Makes intentions clear when executing local programs or scripts 
 
 ### References 
 None
 
 ---
 
-## home sweet home
+## Home Sweet Home
 In this challenge, /challenge/run will write a copy of the flag to any file you specify as an argument on the commandline, with these constraints:
 
 1. Your argument must be an absolute path.
@@ -190,13 +209,11 @@ pwn.college{c79Vo_z227vdbHDGKMgdMkzbxgV.QXzMDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-~ being shorthand for /home/hacker
-
-Bash provides and uses this shorthand because, again, most of your time will be spent in your home directory. Hence ~ is expanded as /home/hacker
-
-cd uses home directory as default destination
-
->l is used to create a file or touch l can also be used
+- `~` symbol is a shorthand notation for the user's home directory (/home/hacker)
+- Bash automatically expands `~` to the full home directory path
+- `cd` without arguments defaults to the home directory
+- `> filename` creates an empty file (alternative to `touch` command)
+- Home directory shortcuts improve efficiency in navigation and file operations
 
 ### References 
 [How_to_create_an_empty_file](https://stackoverflow.com/questions/9381463/how-to-create-a-file-in-linux-from-terminal-window)

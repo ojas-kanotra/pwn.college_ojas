@@ -12,14 +12,16 @@ pwn.college{Ead7X6t_UmfRmi2ngdj1c_Qpr8R.QX3YjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-The use of a commands
+- Commands in Linux are case-sensitive (hello ≠ HELLO)
+- Basic command execution by typing the command name and pressing Enter
+- The `hello` command is used to display a greeting message
 
 ### References 
 None
 
 ---
 
-## Intro to Arguments
+## Intro To Arguments
 In this challenge, to get the flag, you must run the hello command (NOT the echo command) with a single argument of hackers.
 
 ### Solve
@@ -31,7 +33,9 @@ pwn.college{ADmX0Blf_xgK3QmLLUFvwkoTtu2.QX4YjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-The use of a command and arguments 
+- Commands can accept arguments
+- Syntax: `command argument1 argument2 ...`
+- Just like the `hello` command with the `hackers` argument produces specific output 
 
 ### References 
 None
@@ -50,7 +54,10 @@ pwn.college{Y_rJv3Mb79yil8Vl1xypyGUv4Nt.0lNzEzNxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-The use of arrow keys to control the history of terminal
+- Terminal maintains a history of previously executed commands
+- Up arrow key navigates backwards through command history
+- Down arrow key navigates forwards through command history
+- Command history allows reusing previously run commands hence saving time
 
 ### References 
 None
