@@ -83,8 +83,6 @@ Find the option that will give you the flag by reading the challenge man page.
 ### Solve
 **Flag:** `pwn.college{otsYqDGGtIpCbhg6lNIaEtUJFSj.QX1EDO0wyM3kjNzEzW}`
 
-
-
 ```bash
 command man challenge
 command /challenge/challenge --utuiqqp
@@ -110,8 +108,6 @@ HINT 2: though the manpage is randomly named, you still actually use /challenge/
 
 ### Solve
 **Flag:** `pwn.college{helloworld}`
-
-
 
 ```bash
 command 1
@@ -150,20 +146,23 @@ None
 
 --
 
-## Challenge Name
-Add challenge description here
+## Help For Bulletins
+In this challenge, we'll practice using help to look up help for builtins. This challenge's challenge command is a shell builtin, rather than a program.
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{EUi0sy-oJvS8gZg6i25PpiJUWC5.QX0ETO0wyM3kjNzEzW}`
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command help challenge
+command challenge --secret EUi0sy-o
+pwn.college{EUi0sy-oJvS8gZg6i25PpiJUWC5.QX0ETO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- You can get a list of shell builtins by running the builtin help
+- You can get help on a specific one by passing it to the help builtin
 
 ### References 
 None
+
+--
