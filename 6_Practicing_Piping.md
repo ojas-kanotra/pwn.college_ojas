@@ -283,13 +283,12 @@ None
 In this challenge, we have /challenge/hack, /challenge/the, and /challenge/planet. Run the /challenge/hack command, and duplicate its output as input to both the /challenge/the and the /challenge/planet commands! Scroll back through the previous challenges "Duplicating piped data with tee" and "Process substitution for input" if you need a refresher on this method
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{c1Eaas59PxTtYBIB0ZuDZUZYcZ4.QXwgDN1wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command /challenge/hack | tee >(/challenge/the) >(/challenge/planet)
+pwn.college{c1Eaas59PxTtYBIB0ZuDZUZYcZ4.QXwgDN1wyM3kjNzEzW}
 ```
 
 ### New Learnings
@@ -303,20 +302,23 @@ None
 ---
 
 ## Split-piping stderr and stdout
-Add challenge description here
+In this challenge, you have:
+
+/challenge/hack: this produces data on stdout and stderr
+/challenge/the: you must redirect hack's stderr to this program
+/challenge/planet: you must redirect hack's stdout to this program
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{kSrPaa156Wlqy_gCx6NaRR4M7cR.QXxQDM2wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command  /challenge/hack 2> >(/challenge/the) | /challenge/planet
+pwn.college{kSrPaa156Wlqy_gCx6NaRR4M7cR.QXxQDM2wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- | operator links the stdout of the left command with the stdin of the right command
 
 ### References 
 None

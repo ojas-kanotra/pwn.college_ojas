@@ -43,20 +43,19 @@ None
 ---
 
 ## Multi-word Variables
-Add challenge description here
+In this level, you'll need to set the variable PWN to COLLEGE YEAH. Good luck!
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{Av2jUwG0O_DJ3H7n-D_p4wMvKc8.QXwYTN0wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command PWN="COLLEGE YEAH"
+pwn.college{Av2jUwG0O_DJ3H7n-D_p4wMvKc8.QXwYTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- To set VAR to 1337 SAUCE, you need to quote it VAR="1337 SAUCE"
 
 ### References 
 None
@@ -64,20 +63,22 @@ None
 ---
 
 ## Exporting Variables
-Add challenge description here
+In this challenge, you must invoke /challenge/run with the PWN variable exported and set to the value COLLEGE, and the COLLEGE variable set to the value PWN but not exported (e.g., not inherited by /challenge/run)
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{YoGbvCEtimKSFHz1jdbnWSgujZr.QXyYTN0wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command PWN=COLLEGE
+command COLLEGE=PWN
+pwn.college{YoGbvCEtimKSFHz1jdbnWSgujZr.QXyYTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- By default, variables that you set in a shell session are local to that shell process
+- This makes sense because your shell variables might have sensitive or weird data, and you don't want it leaking to other programs you run unless it explicitly shoul
+- You export your variables. When you export your variables, they are passed into the environment variables of child processes.
 
 ### References 
 None
@@ -85,20 +86,19 @@ None
 ---
 
 ## Printing Exported Variables
-Add challenge description here
+Trying env command
 
 ### Solve
 **Flag:** `pwn.college{helloworld}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command env
+pwn.college{oPrsyOVJ-SNITl22mSlCK6BOyWU.QX4UTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+-  env command: it'll print out every exported variable set in your shell
 
 ### References 
 None
@@ -106,20 +106,21 @@ None
 ---
 
 ## Storing Command Output
-Add challenge description here
+Read the output of the /challenge/run command directly into a variable called PWN, and it will contain the flag!
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{QhTT7_kyFtNIV2-77afocZH41mw.QX1cDN1wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command PWN=$(/challenge/run)
+command echo $PWN
+pwn.college{QhTT7_kyFtNIV2-77afocZH41mw.QX1cDN1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- Use of Command Substitution
+- Trivia: You can also use backticks instead of $(): FLAG=`cat /flag` instead of FLAG=$(cat /flag) in the example above. This is an older format, and has some disadvantages (for example, imagine if you wanted to nest command substitutions. How would you do $(cat $(find / -name flag)) with backticks? The official stance of pwn.college is that you should use $(blah) instead of `blah`
 
 ### References 
 None
@@ -127,20 +128,23 @@ None
 ---
 
 ## Reading Input
-Add challenge description here
+In this challenge, your job is to use read to set the PWN variable to the value COLLEGE
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{gl_rg4BDRTivTIWB4OW930tpdvs.QX4cTN0wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command read PWN
+pwn.college{gl_rg4BDRTivTIWB4OW930tpdvs.QX4cTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- reading input from the user (you). That's done using the aptly named read builtin, which reads input into a variable!
+- Here is an example using the -p argument, which lets you specify a prompt (otherwise, it would be hard for you, reading this now, to separate input from output)
+`read -p "INPUT: " MY_VARIABLE`
+- Keep in mind, read reads data from your standard input! The first Hello!, above, was inputted rather than outputted.
+-
 
 ### References 
 None
@@ -148,20 +152,20 @@ None
 ---
 
 ## Reading Files
-Add challenge description here
+Read /challenge/read_me into the PWN environment variable, and we'll give you the flag! The /challenge/read_me will keep changing, so you'll need to read it right into the PWN variable with one command!
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{cOhAugE8y_boxm4i4M8DWfm8k0X.QXwIDO0wyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command read PWN < /challenge/read_me
+pwn.college{cOhAugE8y_boxm4i4M8DWfm8k0X.QXwIDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- Instead of doing VAR=$(cat some_file) whcih is what grouchy hackers call a "Useless Use of Cat"
+- Previously, you read user input into a variable. You've also previously redirected files into command input! Put them together
 
 ### References 
 None
