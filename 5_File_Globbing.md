@@ -2,8 +2,8 @@
 
 ---
 
-## Matching With *
-Starting from your home directory, change your directory to /challenge, but use globbing to keep the argument you pass to cd to at most four characters! Once you're there, run /challenge/run for the flag!
+## Matching With Asterisk
+Navigate to `/challenge` using globbing patterns with the `*` wildcard, keeping your argument to `cd` to four characters or less. Then run `/challenge/run` for the flag.
 
 ### Solve
 **Flag:** `pwn.college{gN_NruhlzkA4ezAG-HzHDB0oAoC.QXxIDO0wyM3kjNzEzW}`
@@ -15,19 +15,20 @@ pwn.college{gN_NruhlzkA4ezAG-HzHDB0oAoC.QXxIDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- `*` is a wildcard that matches any sequence of characters (except `/` and leading `.`)
-- Shell performs glob expansion before passing arguments to commands
-- Globbing helps reduce typing by matching multiple files with patterns
-- `*` can be used anywhere in a filename pattern to match variable parts
-- Pattern `/ch*` matches `/challenge`, `/chdir`, etc.
+- **Asterisk Wildcard**: The `*` symbol is a wildcard that matches any sequence of characters (except `/` and leading `.`)
+- **Shell Expansion**: The shell performs glob expansion before passing arguments to commands
+- **Typing Efficiency**: Globbing helps reduce typing by matching multiple files with concise patterns
+- **Pattern Flexibility**: `*` can be used anywhere in a filename pattern to match variable parts of names
+- **Pattern Examples**: Pattern `/ch*` matches `/challenge`, `/chdir`, `/chrome`, etc.
+- **Character Limitation**: Useful for working within character count restrictions while maintaining functionality
 
 ### References 
 None
 
 ---
 
-## Matching With ?
-Starting from your home directory, change your directory to /challenge, but use the ? character instead of c and l in the argument to cd! Once you're there, run /challenge/run for the flag!
+## Matching With Question Mark
+Navigate to `/challenge` using the `?` wildcard to replace specific characters (`c` and `l`) in the path. Then run `/challenge/run` for the flag.
 
 ### Solve
 **Flag:** `pwn.college{UQ6qe9WT8CMYvcviwSyabD31-9y.QXyIDO0wyM3kjNzEzW}`
@@ -39,19 +40,20 @@ pwn.college{UQ6qe9WT8CMYvcviwSyabD31-9y.QXyIDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- `?` is a single-character wildcard that matches exactly one character
-- More precise than `*` when you know the exact number of characters to match
-- Useful for patterns with known structure but variable characters
-- `/?ha??enge` matches `/challenge` by replacing `c` and `l` with `?`
-- Combines with other patterns for flexible filename matching
+- **Question Mark Wildcard**: The `?` symbol is a single-character wildcard that matches exactly one character
+- **Precision Control**: More precise than `*` when you know the exact number of characters to match
+- **Structured Patterns**: Useful for patterns with known structure but variable individual characters
+- **Pattern Example**: `/?ha??enge` matches `/challenge` by replacing `c` and `l` with `?`
+- **Pattern Combination**: Can be combined with other wildcards for flexible and precise filename matching
+- **Character Substitution**: Ideal for replacing specific known characters while maintaining pattern structure
 
 ### References 
 None
 
 ---
 
-## Matching With []
-We've placed a bunch of files in /challenge/files. Change your working directory to /challenge/files and run /challenge/run with a single argument that bracket-globs into file_b, file_a, file_s, and file_h
+## Matching With Brackets
+Navigate to `/challenge/files` and run `/challenge/run` with a single argument using bracket globbing to match `file_b`, `file_a`, `file_s`, and `file_h`.
 
 ### Solve
 **Flag:** `pwn.college{8jkBH53y8LBBZuplzhbf4t6v9mw.QXzIDO0wyM3kjNzEzW}`
@@ -63,19 +65,20 @@ pwn.college{8jkBH53y8LBBZuplzhbf4t6v9mw.QXzIDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- `[]` brackets define character classes that match any single character from the set
-- `[absh]` matches exactly one character: either `a`, `b`, `s`, or `h`
-- More specific than `?` when you want to limit which characters can match
-- Can specify ranges like `[a-z]` or `[0-9]` for character ranges
-- Useful for matching files with similar names but different single characters
+- **Bracket Character Classes**: `[]` brackets define character classes that match any single character from the specified set
+- **Specific Matching**: `[absh]` matches exactly one character: either `a`, `b`, `s`, or `h`
+- **Precision Control**: More specific than `?` when you want to limit which characters can match a position
+- **Range Specification**: Can specify ranges like `[a-z]` for lowercase letters or `[0-9]` for digits
+- **Pattern Efficiency**: Useful for matching files with similar names but different single characters
+- **Character Selection**: Allows precise control over which characters are acceptable in a pattern position
 
 ### References 
 None
 
 ---
 
-## Matching Paths With []
-Once more, we've placed a bunch of files in /challenge/files. Starting from your home directory, run /challenge/run with a single argument that bracket-globs into the absolute paths to the file_b, file_a, file_s, and file_h files!
+## Matching Paths With Brackets
+From your home directory, run `/challenge/run` with a single argument using bracket globbing to match the absolute paths to `file_b`, `file_a`, `file_s`, and `file_h`.
 
 ### Solve
 **Flag:** `pwn.college{s_9FXXkApjOLrZ1rFKUCLnObf-G.QX0IDO0wyM3kjNzEzW}`
@@ -86,11 +89,12 @@ pwn.college{s_9FXXkApjOLrZ1rFKUCLnObf-G.QX0IDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Globbing works with full absolute paths, not just filenames
-- Can combine directory paths with glob patterns: `/path/to/file_[abc]`
-- Shell expands the entire path before executing the command
-- Enables matching files across different directories in one command
-- Absolute path globbing provides precise file targeting
+- **Full Path Globbing**: Globbing works with complete absolute paths, not just filenames
+- **Path Pattern Combination**: Can combine directory paths with glob patterns: `/path/to/file_[abc]`
+- **Shell Path Expansion**: Shell expands the entire path pattern before executing the command
+- **Multi-Directory Matching**: Enables matching files across different directories in a single command
+- **Absolute Path Precision**: Absolute path globbing provides precise file targeting regardless of current directory
+- **Location Independence**: Works from any directory since absolute paths are used
 
 ### References 
 None
@@ -98,7 +102,7 @@ None
 ---
 
 ## Multiple Globs
-This challenge has diversely-named files in /challenge/files. Go cd there and run /challenge/run, providing a single argument: a short (3 characters or less) globbed word with two * globs in it that covers every word that contains the letter p.
+Navigate to `/challenge/files` and run `/challenge/run` with a single argument: create a short (3 characters or less) globbed pattern using two `*` wildcards that matches every file containing the letter `p`.
 
 ### Solve
 **Flag:** `pwn.college{MAPAePB8GLtRJw7Rhq5AR10VQKV.0lM3kjNxwyM3kjNzEzW}`
@@ -110,11 +114,12 @@ pwn.college{MAPAePB8GLtRJw7Rhq5AR10VQKV.0lM3kjNxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Multiple glob patterns can be combined in a single argument
-- `*p*` uses two wildcards: matches any characters, then `p`, then any characters
-- Enables complex pattern matching with minimal typing
-- Pattern `*p*` matches `apple`, `pper`, `arp`, etc.
-- Powerful technique for matching files with specific character sequences
+- **Multiple Wildcard Usage**: Multiple glob patterns can be combined in a single argument for complex matching
+- **Pattern Structure**: `*p*` uses two wildcards: matches any characters, then `p`, then any characters
+- **Efficient Matching**: Enables complex pattern matching with minimal typing and maximum flexibility
+- **Pattern Examples**: Pattern `*p*` matches `apple`, `pepper`, `arp`, `laptop`, etc.
+- **Character Sequence Matching**: Powerful technique for finding files containing specific character sequences anywhere in the name
+- **Minimal Pattern Maximum Coverage**: Short patterns can match extensive file sets when designed properly
 
 ### References 
 None
@@ -122,7 +127,7 @@ None
 ---
 
 ## Mixing Globs
-This challenge combines techniques from previous levels, requiring you to mix different globbing patterns together. 
+Combine different globbing techniques from previous lessons to create sophisticated pattern matching expressions. 
 
 ### Solve
 **Flag:** `pwn.college{0o0EyF46N6__6lzwoEaBvqV-Bwk.QX1IDO0wyM3kjNzEzW}`
@@ -133,11 +138,12 @@ pwn.college{0o0EyF46N6__6lzwoEaBvqV-Bwk.QX1IDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Combines bracket notation `[]` with wildcard `*` for sophisticated patterns
-- `[cep]*` matches files starting with `c`, `e`, or `p` followed by anything
-- Demonstrates the power of mixing different glob types
-- Creates precise yet flexible file matching patterns
-- Essential skill for advanced shell scripting and file operations
+- **Pattern Combination**: Combines bracket notation `[]` with wildcard `*` for sophisticated pattern matching
+- **Complex Pattern Example**: `[cep]*` matches files starting with `c`, `e`, or `p` followed by any characters
+- **Glob Synergy**: Demonstrates the power of mixing different glob types for enhanced pattern control
+- **Precision and Flexibility**: Creates patterns that are both precise in requirements and flexible in matching
+- **Advanced Scripting**: Essential skill for advanced shell scripting and automated file operations
+- **Pattern Optimization**: Combining glob types allows for more efficient and expressive file matching patterns
 
 ### References 
 None

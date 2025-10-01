@@ -1,7 +1,9 @@
 # Practicing Piping
 
-## Redirecting output
-In this challenge, you must use this output redirection to write the word PWN (all uppercase) to the filename COLLEGE (all uppercase).
+---
+
+## Redirecting Output
+Use output redirection to write the word "PWN" to a file named "COLLEGE".
 
 ### Solve
 **Flag:** `pwn.college{QtgTnqy52bUlGeLltuz0tY3eIdG.QX0YTN0wyM3kjNzEzW}`
@@ -13,17 +15,19 @@ pwn.college{QtgTnqy52bUlGeLltuz0tY3eIdG.QX0YTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Redirecting stdout to files. You can accomplish this with the > character
-- hacker@dojo:~$ echo hi > asdf
-- This will redirect the output of echo hi (which will be hi) to the file asdf
+- **Output Redirection**: Redirect standard output (stdout) to files using the `>` character
+- **Redirection Syntax**: Use `command > filename` to send command output to a file
+- **File Creation**: Redirection automatically creates the target file if it doesn't exist
+- **Content Replacement**: Using `>` overwrites existing file content completely
+- **Example Usage**: `echo hi > asdf` redirects the output "hi" to the file "asdf"
 
 ### References 
 None
 
 ---
 
-## Redirecting more output
-Add challenge description here
+## Redirecting More Output
+Practice redirecting output from any command, not just `echo`, to capture program results in files.
 
 ### Solve
 **Flag:** `pwn.college{A0XSkkO6pVyALJ6ialgUKDyQE7S.QX1YTN0wyM3kjNzEzW}`
@@ -36,16 +40,19 @@ pwn.college{A0XSkkO6pVyALJ6ialgUKDyQE7S.QX1YTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Aside from redirecting the output of echo, you can, of course, redirect the output of any command.
-- command > file
+- **Universal Redirection**: Any command's output can be redirected, not just `echo`
+- **General Syntax**: Use `command > file` pattern for any command
+- **Program Output Capture**: Redirect complex program outputs to files for later analysis
+- **File Storage**: Useful for saving command results, logs, or data for future reference
+- **Workflow Integration**: Essential technique for building automated workflows and scripts
 
 ### References 
 None
 
 ---
 
-## Appending output
-To practice, run /challenge/run with an append-mode redirect of the output to the file /home/hacker/the-flag. The practice will write the first half of the flag to the file, and the second half to stdout if stdout is redirected to the file. If you properly redirect in append-mode, the second half will be appended to the first, but if you redirect in truncation mode (>), the second half will overwrite the first and you won't get the flag!
+## Appending Output
+Run `/challenge/run` with append-mode redirection to `/home/hacker/the-flag`. The program writes the first half of the flag to the file, then the second half to stdout. Use append mode (`>>`) to combine both parts, not truncate mode (`>`) which would overwrite the first half.
 
 ### Solve
 **Flag:** `pwn.college{Ynmx4-QxJt3ggoeGwlBjo1ZgBdO.QX3ATO0wyM3kjNzEzW}`
@@ -58,18 +65,20 @@ pwn.college{Ynmx4-QxJt3ggoeGwlBjo1ZgBdO.QX3ATO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- > simply writes over the file
-- >> appends to the file
-- Often times, you want to do this in aggregate: run a bunch of commands, save their output, and grep through it later. In this case, you might want all that output to keep appending to the same file, but > will create a new output file every time, deleting the old contents.
-- You can redirect input in append mode using >> instead of >
+- **Truncation vs Append**: `>` overwrites file contents completely, while `>>` appends to existing content
+- **Append Mode Benefits**: `>>` allows accumulating output from multiple commands in the same file
+- **Workflow Applications**: Often used to aggregate multiple command outputs for later analysis with tools like `grep`
+- **Content Preservation**: Using `>>` prevents accidental loss of previous command outputs
+- **Sequential Operations**: Essential for building logs or collecting data from multiple program runs
+- **File Content Management**: Understanding when to truncate vs append is crucial for proper file handling
 
 ### References 
 None
 
 ---
 
-## Redirecting errors
-In this challenge, you will need to redirect the output of /challenge/run, like before, to myflag, and the "errors" (in our case, the instructions) to instructions. You'll notice that nothing will be printed to the terminal, because you have redirected everything! You can find the instructions/feedback in instructions and the flag in myflag when you successfully pull this off!
+## Redirecting Errors
+Redirect both standard output and standard error to separate files. Send `/challenge/run` output to `myflag` and errors (instructions) to `instructions`. Nothing will print to the terminal since all output is redirected.
 
 ### Solve
 **Flag:** `pwn.college{EEmPGxs3M7kHTzt9zjXzoY-f0Do.QX3YTN0wyM3kjNzEzW}`
@@ -82,18 +91,20 @@ pwn.college{EEmPGxs3M7kHTzt9zjXzoY-f0Do.QX3YTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- A File Descriptor (FD) is a number that describes a communication channel in Linux
-- FD 0: Standard Input
-- FD 1: Standard Output
-- FD 2: Standard Error
+- **File Descriptors**: A File Descriptor (FD) is a number that describes a communication channel in Linux
+- **Standard Input (FD 0)**: The default input source, typically keyboard input
+- **Standard Output (FD 1)**: The default output destination, typically terminal display
+- **Standard Error (FD 2)**: The default error message destination, typically terminal display
+- **Error Redirection Syntax**: Use `2>` to redirect standard error to a file
+- **Separate Stream Control**: Ability to redirect stdout and stderr to different destinations simultaneously
 
 ### References 
 None
 
 ---
 
-## Redirecting input
-Practice using /challenge/run, which will require you to redirect the PWN file to it and have the PWN file contain the value COLLEGE!
+## Redirecting Input
+Create a file named "PWN" containing "COLLEGE", then redirect this file as input to `/challenge/run`.
 
 ### Solve
 **Flag:** `pwn.college{wYcF16ihpayq4uc6A3MAM-Wjd5F.QXwcTN0wyM3kjNzEzW}`
@@ -105,19 +116,19 @@ pwn.college{wYcF16ihpayq4uc6A3MAM-Wjd5F.QXwcTN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Just like you can redirect output from programs, you can redirect input to programs! This is done using <
+- **Input Redirection**: Just like output redirection, you can redirect input to programs using the `<` operator
+- **Input Source Control**: Allows programs to read from files instead of keyboard input
+- **File as Input**: Use `command < filename` to feed file contents as input to a command
+- **Automation Benefits**: Essential for automating programs that normally require interactive input
+- **Data Pipeline**: Forms the foundation for creating data processing pipelines
 
 ### References 
 None
 
 ---
 
-## Grepping stored results
-In preparation for more complex levels, we want you to:
-
-- Redirect the output of /challenge/run to /tmp/data.txt.
-- This will result in a hundred thousand lines of text, with one of them being the flag, in /tmp/data.txt.
-- `grep` that for the flag!
+## Grepping Stored Results
+Redirect `/challenge/run` output to `/tmp/data.txt`, then use `grep` to find the flag among the hundred thousand lines of text.
 
 ### Solve
 **Flag:** `pwn.college{McRktwC9DsBN_UKvjXPbeolaFdF.QX4EDO0wyM3kjNzEzW}`
@@ -130,15 +141,19 @@ pwn.college{McRktwC9DsBN_UKvjXPbeolaFdF.QX4EDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
--
+- **Two-Step Process**: Combines output redirection with pattern searching for complex data analysis
+- **Large File Handling**: Demonstrates handling large amounts of output data efficiently
+- **File Descriptor Specificity**: Using `1>` explicitly specifies standard output redirection
+- **Data Storage and Analysis**: Shows the workflow of capturing data first, then analyzing it
+- **Grep Integration**: Combines file operations with text searching for practical problem-solving
 
 ### References 
 None
 
 ---
 
-## Grepping live output
-/challenge/run will output a hundred thousand lines of text, including the flag. grep for the flag!
+## Grepping Live Output
+Use piping to search through `/challenge/run` output in real-time without storing it to a file first.
 
 ### Solve
 **Flag:** `pwn.college{oYUy-XEgF94Uf1eDz4F6CVfceV9.QX5EDO0wyM3kjNzEzW}`
@@ -150,17 +165,20 @@ pwn.college{oYUy-XEgF94Uf1eDz4F6CVfceV9.QX5EDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- It turns out that you can "cut out the middleman" and avoid the need to store results to a file 
-- You can do this by using the | (pipe) operator
-- Standard output from the command to the left of the pipe will be connected to (piped into) the standard input of the command to the right of the pipe
+- **Pipe Operator**: The `|` (pipe) operator connects command output directly to another command's input
+- **Real-Time Processing**: Eliminates the need to store intermediate results in files
+- **Stream Connection**: Standard output from left command becomes standard input for right command
+- **Efficiency Benefits**: Saves disk space and processing time by avoiding temporary files
+- **Command Chaining**: Foundation for building complex command pipelines for data processing
+- **Memory Streaming**: Data flows through memory rather than being written to disk
 
 ### References 
 None
 
 ---
 
-## Grepping errors
-This time on standard error, grep through it to find the flag!
+## Grepping Errors
+The flag is output to standard error this time. Use redirection techniques to pipe stderr through `grep` to find the flag.
 
 ### Solve
 **Flag:** `pwn.college{Y9BLr8eOXdUKWB40WJzCkmiGpy4.QX1ATO0wyM3kjNzEzW}`
@@ -172,14 +190,12 @@ pwn.college{Y9BLr8eOXdUKWB40WJzCkmiGpy4.QX1ATO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- The > operator redirects a given file descriptor to a file, and you've used 2> to redirect fd 2, which is standard error
-- The | operator redirects only standard output to another program, and there is no 2| form of the operator!
-- The shell has a >& operator, which redirects a file descriptor to another file descriptor. 
-- This means that we can have a two-step process to grep through errors: 
-
-First, we redirect standard error to standard output (2>& 1)
-
-Then pipe the now-combined stderr and stdout as normal (|)
+- **File Descriptor Redirection**: The `>` operator redirects file descriptors to files, `2>` redirects stderr
+- **Pipe Limitation**: The `|` operator only redirects stdout, there's no `2|` for stderr
+- **File Descriptor Merging**: The `>&` operator redirects one file descriptor to another file descriptor
+- **Two-Step Error Piping**: First redirect stderr to stdout (`2>&1`), then pipe the combined stream (`|`)
+- **Stream Merging**: Combining stderr and stdout allows both to be processed by the same pipeline
+- **Advanced Redirection**: Essential technique for processing error messages through text processing tools
 
 
 ### References 
@@ -326,22 +342,34 @@ None
 ---
 
 ## Named pipes
-Add challenge description here
+This challenge will be a simple introduction to FIFOs. You'll need to create a /tmp/flag_fifo file and redirect the stdout of /challenge/run to it. If you're successful, /challenge/run will write the flag into the FIFO! Go do it!
+
+HINT: The blocking behavior of FIFOs makes it hard to solve this challenge in a single terminal. You may want to use the Desktop or VSCode mode for this challenge so that you can launch two terminals.
 
 ### Solve
-**Flag:** `pwn.college{helloworld}`
+**Flag:** `pwn.college{sLm6xZfupUk2vfkEUf9lUWNQZsZ.01MzMDOxwyM3kjNzEzW}`
 
 
 ```bash
-command 1
-command 2
-pwn.college{helloworld}
+command mkfifo /tmp/flag_fifo
+command /challenge/run > /tmp/flag_fifo
+command cat /tmp/flag_fifo 
+pwn.college{sLm6xZfupUk2vfkEUf9lUWNQZsZ.01MzMDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- A FIFO is a special kind of file that acts like a pipe, but you create it yourself and it stays on your filesystem until you delete it.
+- You can make one using the command mkfifo my_pipe. This creates a named pipe called "my_pipe".
+- When you list files (ls -l), the FIFO shows a "p" at the start of its permissions (e.g., prw-r--r--) instead of a dash (-) like normal files.
+- FIFOs let processes communicate by writing to and reading from the pipe file, much like a direct channel.
+- The key thing: FIFOs block operations until both writing and reading ends are connected. If you try to write but no one is reading, the write waits; if you try to read but no one is writing, the read waits.
+
+Unlike regular files, FIFOs:
+
+- Lose the data as soon as it's read (no persistent content).
+- Automatically synchronize communication between processes (readers and writers wait for each other).
+- Can be used to build complex data flows and support multiple writers and readers.
 
 ### References 
 None
-
 ---

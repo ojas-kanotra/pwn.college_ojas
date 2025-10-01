@@ -3,8 +3,7 @@
 ---
 
 ## Learning From Documentation
-The program for this challenge is /challenge/challenge, and you'll need to invoke it properly in order for it to give you the flag. Let's pretend that this is its documentation:
-Welcome to the documentation for /challenge/challenge! To properly run this program, you will need to pass it the argument of --giveflag. Good luck!
+The program for this challenge is /challenge/challenge, and you'll need to invoke it properly in order for it to give you the flag. Let's read its documentation to understand how to use it correctly. The documentation tells us exactly what argument we need to pass to get the flag.
 
 ### Solve
 **Flag:** `pwn.college{olfzGqD62c47-nb6NbY7a1mP7b3.QX0ITO0wyM3kjNzEzW}`
@@ -16,11 +15,12 @@ pwn.college{olfzGqD62c47-nb6NbY7a1mP7b3.QX0ITO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Documentation is essential for understanding program usage and available arguments
-- Command-line arguments modify program behavior and functionality
-- Proper argument specification is crucial for correct program execution
-- Arguments like `--giveflag` are often documented in program help or manuals
-- Reading documentation saves time and prevents trial-and-error approaches
+- **Documentation Importance**: Documentation is essential for understanding program usage and available arguments
+- **Command-Line Arguments**: Arguments modify program behavior and provide additional functionality beyond basic execution
+- **Proper Specification**: Correct argument specification is crucial for proper program execution and desired outcomes
+- **Argument Documentation**: Arguments like `--giveflag` are typically documented in program help files or manuals
+- **Efficiency Benefits**: Reading documentation saves time and prevents inefficient trial-and-error approaches
+- **Professional Practice**: Understanding documentation is a fundamental skill for working with command-line tools
 
 ### References 
 None
@@ -28,9 +28,7 @@ None
 ---
 
 ## Learning Complex Usage
-Here is this level's documentation for /challenge/challenge:
-
-Welcome to the documentation for /challenge/challenge! This program allows you to print arbitrary files to the terminal, when given the --printfile argument. The argument to the --printfile argument is the path of the flag to read. For example, /challenge/challenge --printfile /challenge/DESCRIPTION.md will print out the description of the level!
+Use the `/challenge/challenge` program with the `--printfile` argument to read files. The documentation explains: "This program allows you to print arbitrary files to the terminal, when given the --printfile argument. The argument to the --printfile argument is the path of the file to read."
 
 ### Solve
 **Flag:** `pwn.college{wzWm1aHxkOoV-VbngUS1Xolqehk.QX1ITO0wyM3kjNzEzW}`
@@ -41,11 +39,12 @@ pwn.college{wzWm1aHxkOoV-VbngUS1Xolqehk.QX1ITO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Some arguments require additional parameters (argument to the argument)
-- `--printfile` demonstrates arguments that take file paths as parameters
-- Complex command patterns: `command --argument parameter`
-- Understanding argument structure is key to using advanced program features
-- Documentation provides examples of proper argument usage patterns 
+- **Parameterized Arguments**: Some arguments require additional parameters (argument to the argument)
+- **File Path Arguments**: `--printfile` demonstrates arguments that accept file paths as parameters
+- **Complex Command Patterns**: Understanding the structure `command --argument parameter` for advanced functionality
+- **Argument Structure**: Proper argument structure knowledge is key to utilizing advanced program features
+- **Documentation Examples**: Well-written documentation provides clear examples of proper argument usage patterns
+- **Parameter Passing**: Learning how to pass specific values to command-line arguments for customized behavior 
 
 ### References 
 None
@@ -53,7 +52,7 @@ None
 ---
 
 ## Reading Manuals
-The challenge in this level has a secret option that, when you use it, will cause the challenge to print the flag. You must learn this option through the man page for challengemfind man 
+The challenge program has a secret option that will print the flag. Find this option by reading the manual page using the `man` command. 
 
 ### Solve
 **Flag:** `pwn.college{E0tmYhucTK47BesYQ3PA5ZVQjOE.QX0EDO0wyM3kjNzEzW}`
@@ -65,12 +64,12 @@ pwn.college{E0tmYhucTK47BesYQ3PA5ZVQjOE.QX0EDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- `man` command displays manual pages for Linux commands and programs
-- Manual pages have standardized format: NAME, SYNOPSIS, DESCRIPTION, SEE ALSO
-- SYNOPSIS section shows command usage patterns and argument structure
-- Use `man command_name` to access documentation (not full paths)
-- Press `q` to quit the manual page viewer
-- Manual pages are the primary source of official command documentation
+- **Man Command**: The `man` command displays manual pages for Linux commands and programs
+- **Manual Structure**: Manual pages follow standardized format: NAME, SYNOPSIS, DESCRIPTION, OPTIONS, SEE ALSO
+- **Synopsis Section**: The SYNOPSIS section shows command usage patterns and argument structure clearly
+- **Command Reference**: Use `man command_name` to access documentation (use command name, not full paths)
+- **Navigation Controls**: Press `q` to quit the manual page viewer and return to terminal
+- **Official Documentation**: Manual pages are the primary source of official command documentation in Linux systems
 
 ### References 
 None
@@ -78,7 +77,7 @@ None
 ---
 
 ## Searching Manuals
-Find the option that will give you the flag by reading the challenge man page.
+Find the correct option that will give you the flag by reading and searching through the challenge manual page.
 
 ### Solve
 **Flag:** `pwn.college{otsYqDGGtIpCbhg6lNIaEtUJFSj.QX1EDO0wyM3kjNzEzW}`
@@ -90,11 +89,12 @@ pwn.college{otsYqDGGtIpCbhg6lNIaEtUJFSj.QX1EDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Navigate manual pages using arrow keys, PgUp/PgDn for scrolling
-- Search within man pages using `/` followed by search term
-- Use `n` for next search result, `N` for previous result
-- Use `?` for backward search functionality
-- These navigation skills are essential for efficiently finding information in long documentation
+- **Manual Navigation**: Navigate manual pages using arrow keys, PgUp/PgDn for efficient scrolling
+- **Search Functionality**: Search within man pages using `/` followed by your search term
+- **Search Navigation**: Use `n` for next search result, `N` for previous search result
+- **Backward Search**: Use `?` for backward search functionality through the document
+- **Efficiency Skills**: These navigation skills are essential for efficiently finding specific information in lengthy documentation
+- **Information Retrieval**: Master these techniques to quickly locate relevant options and arguments in complex manual pages
 
 ### References 
 None
@@ -102,9 +102,7 @@ None
 ---
 
 ## Searching For Manuals
-HINT 1: man man teaches you advanced usage of the man command itself, and you must use this knowledge to figure out how to search for the hidden manpage that will tell you how to use /challenge/challenge
-
-HINT 2: though the manpage is randomly named, you still actually use /challenge/challenge to get the flag!
+Use advanced `man` command techniques to find a hidden manual page. First read `man man` to learn advanced usage, then search for the randomly named manual page that explains how to use `/challenge/challenge`.
 
 ### Solve
 **Flag:** `pwn.college{helloworld}`
@@ -116,15 +114,18 @@ pwn.college{helloworld}
 ```
 
 ### New Learnings
-- Advanced manual navigation techniques using `man man`
+- **Meta Documentation**: Using `man man` to learn advanced usage of the `man` command itself
+- **Manual Search Techniques**: Advanced methods for finding and accessing manual pages with non-standard names
+- **Hidden Documentation**: Skills for discovering documentation that may not be immediately obvious or accessible
+- **Search Strategies**: Systematic approaches to finding relevant documentation when standard methods don't work
 
 ### References 
 None
 
 ---
 
-## Helpful Program
-You will practice reading a program's documentation with --help
+## Helpful Programs
+Practice reading a program's built-in documentation using the `--help` argument.
 
 ### Solve
 **Flag:** `pwn.college{I6Cw1JMR9JRLrmQLpjpVTtLM2sS.QX3IDO0wyM3kjNzEzW}`
@@ -139,15 +140,19 @@ pwn.college{I6Cw1JMR9JRLrmQLpjpVTtLM2sS.QX3IDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Some programs don't have a man page, but might tell you how to run them if invoked with a special argument. Usually, this argument is --help, but it can often be -h or, in rare cases, -?, help
+- **Help Arguments**: Some programs don't have manual pages but provide built-in help when invoked with special arguments
+- **Common Help Options**: Usually `--help` is used, but can also be `-h`, `-?`, or `help` in different programs
+- **Built-in Documentation**: Programs can include their own documentation accessible through command-line arguments
+- **Parameter Requirements**: Some arguments require additional parameters (like `-g 619` where 619 is the required parameter)
+- **Trial and Error**: Learning to systematically test different argument combinations when documentation is unclear
 
 ### References 
 None
 
 --
 
-## Help For Bulletins
-In this challenge, we'll practice using help to look up help for builtins. This challenge's challenge command is a shell builtin, rather than a program.
+## Help For Builtins
+Practice using the `help` command to get documentation for shell builtins. The challenge command in this level is a shell builtin, not a separate program.
 
 ### Solve
 **Flag:** `pwn.college{EUi0sy-oJvS8gZg6i25PpiJUWC5.QX0ETO0wyM3kjNzEzW}`
@@ -159,8 +164,11 @@ pwn.college{EUi0sy-oJvS8gZg6i25PpiJUWC5.QX0ETO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You can get a list of shell builtins by running the builtin help
-- You can get help on a specific one by passing it to the help builtin
+- **Shell Builtins**: Builtins are commands built into the shell itself, not separate executable programs
+- **Help Command**: Use the `help` command to get documentation for shell builtins
+- **Builtin List**: Running `help` without arguments shows a list of all available shell builtins
+- **Specific Help**: Get help on a specific builtin by passing its name to the help command: `help command_name`
+- **Builtin vs Program**: Understanding the difference between shell builtins and external programs for documentation purposes
 
 ### References 
 None
