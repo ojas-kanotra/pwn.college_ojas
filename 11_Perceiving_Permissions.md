@@ -1,6 +1,6 @@
-# Perceiving Permissions
+# Chaining Commands
 
-- You can check out the permissions of a file or directory using ls -l. Let's make some files and look at their permissions
+- Commands can be chained together using various operators to create more complex operations
 ```bash
 hacker@dojo:~$ mkdir pwn_directory
 hacker@dojo:~$ touch college_file
@@ -223,7 +223,7 @@ pwn.college{oKyFHeo498EY537VT0WGPpAmOhk.QXzEjN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-SUID (set-user-ID) is a special permission that makes an executable run with the file owner’s privileges (often root), useful for controlled elevation but dangerous if set on insecure programs.
+Brief note on what you learned from the challenge
 
 ### References 
 None
