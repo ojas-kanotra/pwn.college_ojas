@@ -10,12 +10,13 @@ total 4
 drwxr-xr-x 2 hacker hacker 4096 May 22 13:42 pwn_directory
 hacker@dojo:~$
 ```
+
 - The first character of each line represents the file type
 - The next nine characters are the actual access permissions of the file or directory, split into 3 characters denoting the permissions that the user who owns the file (termed the "owner") has to the file, 3 characters denoting the permissions that the group that owns the file (termed the "group") has to the file, and 3 characters denoting the permissions that all other access
 - There are two columns showing the user that owns the file and then the group that owns the file
 
 ## Changing File Ownership
-Change the ownership of /flag to the hacker user using chown, then read it.
+Change file owner with `chown user file` to transfer ownership and access rights.
 
 ### Solve
 **Flag:** `pwn.college{gQpb_uZS8BCtPYl4BsLuAo8_1ma.QXxEjN0wyM3kjNzEzW}`
@@ -27,15 +28,21 @@ pwn.college{gQpb_uZS8BCtPYl4BsLuAo8_1ma.QXxEjN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- On a shared system (such as in a computer lab), there might be many people with different user accounts, all with their own files in their own home directories. But even on a non-shared system (such as your personal PC), Linux still has many "service" user accounts for different tasks.
-- Interestingly, we can change the ownership of files! This is done via the chown (change owner) command
-- chown [username] [file]
+- chown changes a file's owner: `sudo chown user file` (root usually required to change owner).
+- Ownership determines which user-level checks are used for access decisions.
+- Verify owner with `ls -l` and use `stat filename` for full metadata.
+
+```bash
+# examples:
+sudo chown hacker /flag      # make 'hacker' the owner of /flag
+ls -l /flag                  # verify the owner and permissions
+```
 
 ### References 
 None
 
 ## Groups and Files
-Change the group of /flag to one that allows reading, then read the flag.
+Change a file's group with `chgrp` to grant group-based access where appropriate.
 
 ### Solve
 **Flag:** `pwn.college{UtZ_d1VzWTXiGa9jc5B0ffMXNzq.QXxcjM1wyM3kjNzEzW}`
@@ -47,16 +54,22 @@ pwn.college{UtZ_d1VzWTXiGa9jc5B0ffMXNzq.QXxcjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You can check what groups you are part of with the id command
-- Here, the hacker user is only in the hacker group. The most common use-case for groups is to control access to different system resources
-- A typical main user of a typical Linux desktop has a lot of groups
-- group ownership can be changed with the chgrp (change group) command! - Unless you have write access to the file and membership in the new group, this typically requires root access. 
+- Groups let multiple users share access: change group with `chgrp group file` or `sudo chgrp group file`.
+- Check your groups with `id` or `id -nG`; group membership affects access checks.
+- Only root (or file owner in some systems) can change a file's group to one you aren't a member of.
+
+```bash
+# examples:
+id                      # show current user and groups
+sudo chgrp hacker /flag  # change group ownership
+ls -l /flag              # verify group and permissions
+```
 
 ### References 
 None
 
 ## Fun with Groups Names
-Use id to find your group name, then chgrp to change /flag's group for reading.
+List your groups (`id`) and use `chgrp` to set a group that has the desired permissions.
 
 ### Solve
 **Flag:** `pwn.college{MHx_lJvQKSpaKkWDvinsjxE50cU.QXycjM1wyM3kjNzEzW}`
@@ -69,14 +82,19 @@ pwn.college{MHx_lJvQKSpaKkWDvinsjxE50cU.QXycjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- every user has their own group, but this does not have to be the case
-- For example, many computer labs will put all of their users into a single, shared users group.
+- Every user has one or more groups; `id -nG` lists group names.
+- Use `chgrp` to change group ownership when appropriate; group ACLs control group access.
+
+```bash
+# example:
+id -nG | tr ' ' '\n'   # list group names one-per-line for current user
+```
 
 ### References 
 None
 
 ## Changing Permissions
-Follow the prompts from /challenge/run to set permissions on /challenge/pwn correctly eight times to unlock /flag.
+Use `chmod` (symbolic or octal) to add/remove read/write/execute bits and control access.
 
 ### Solve
 **Flag:** `pwn.college{Iw30K7RlVrmMR9SnjFkpu2PvpE-.QXzcjM1wyM3kjNzEzW}`
@@ -128,11 +146,18 @@ hacker@dojo:~$
     - o-w removes write access for other users
     - a-rwx removes all permissions for the user, group, and world
 
+```bash
+# common examples:
+chmod o+r /flag        # add read for others
+chmod u+x ./script.sh  # make script executable by owner
+ls -l /flag            # verify mode
+```
+
 ### References 
 None
 
 ## Executable Files
-Make /challenge/run executable with chmod, then run it for the flag.
+Make scripts executable with `chmod +x` and run them; execute permission is required to run binaries.
 
 ### Solve
 **Flag:** `pwn.college{4EZ40kFGOSxYzL4THtOE__dV1Qr.QXyEjN0wyM3kjNzEzW}`
@@ -144,13 +169,20 @@ pwn.college{4EZ40kFGOSxYzL4THtOE__dV1Qr.QXyEjN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- When you invoke a program, such as /challenge/run, Linux will only actually execute it if you have execute-access to the program file
+- Execute permission is required to run a file (`chmod u+x file`);
+- Running `./file` uses the current path; use a shebang to select the interpreter.
+
+```bash
+# example:
+chmod u+x /challenge/run
+./challenge/run
+```
 
 ### References 
 None
 
 ## Permission Tweaking Practice
-Use chmod to make /flag readable and get the flag.
+Practice `chmod` with symbolic and octal modes to achieve the required permissions.
 
 ### Solve
 **Flag:** `pwn.college{Uqz3mw0m6S1MThaaItZ79qHujRn.QXwEjN0wyM3kjNzEzW}`
@@ -170,10 +202,13 @@ pwn.college{Uqz3mw0m6S1MThaaItZ79qHujRn.QXwEjN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- The three digits in chmod always go in this order: owner - group - others
-- Read	    r	4
-- Write	    w	2
-- Execute	x	1
+- Octal bits map: owner-group-others (e.g., `chmod 750 file` → u=rwx,g=rx,o=0).
+- Use small, incremental changes (e.g., `chmod u+rx`) while verifying with `ls -l`.
+
+```bash
+# octal example:
+chmod 755 ./script.sh   # rwxr-xr-x
+```
 
 ### References 
 - Learning reference chatgpt
@@ -200,21 +235,14 @@ pwn.college{geNoKGcjkl2m2mynryMgG9aylBx.QXzETO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- In addition to adding and removing permissions, as in the previous level, chmod can also simply set permissions altogether, overwriting the old ones. This is done by using = instead of - or +
-- u=rw sets read and write permissions for the user, and wipes the execute permission
-- o=x sets only executable permissions for the world, wiping read and write
-- a=rwx sets read, write, and executable permissions for the user, group, and world!
-- Even run multiples chmod u=rw,g=r /challenge/pwn
-- You can zero out permission with dash(-) chmod u=rw,g=r,o=- /challenge/pwn
-
-### References 
-None
+- `chmod u=r,g=rw,o=r file` sets exact permissions (overwrite mode with `=`).
+- Use `=` when you want to replace current permissions, `+`/`-` to modify.
 
 ## The Suid Bit
-Set the SUID bit on /challenge/getroot with chmod to run it as root and get the flag.
+Set SUID (`chmod u+s`) to let an executable run with the owner's privileges—use with extreme caution.
 
 ### Solve
-**Flag:**  `pwn.college{oKyFHeo498EY537VT0WGPpAmOhk.QXzEjN0wyM3kjNzEzW}`
+**Flag:** `pwn.college{oKyFHeo498EY537VT0WGPpAmOhk.QXzEjN0wyM3kjNzEzW}`
 
 ```bash
 command chmod u+s /challenge/getroot
@@ -223,7 +251,14 @@ pwn.college{oKyFHeo498EY537VT0WGPpAmOhk.QXzEjN0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- **SUID overview**: setting the SUID bit (`chmod u+s`) on an executable causes it to run with the file owner's privileges (commonly root) regardless of the invoking user.
+- **Security implications**: SUID programs can be powerful escalation vectors; only trusted binaries should have this bit set.
+- **Detection**: `ls -l` shows an `s` in the user-execute position when SUID is set (e.g., `rwsr-xr-x`).
+
+```bash
+# detect SUID files:
+find / -perm -4000 -type f 2>/dev/null | head
+```
 
 ### References 
 None

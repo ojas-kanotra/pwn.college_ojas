@@ -1,7 +1,7 @@
 # Terminal Multiplexing
 
-## Launching Screen 
-Job Control Is Wonderful
+## Launching Screen
+Create a detachable `screen` session to run persistent tasks across disconnects.
 
 ### Solve
 **Flag:** `pwn.college{4PQte3ngUk3Kvx76gYEhQDHdXSq.0VN4IDOxwyM3kjNzEzW}`
@@ -12,13 +12,20 @@ pwn.college{4PQte3ngUk3Kvx76gYEhQDHdXSq.0VN4IDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- screen is a program that creates virtual terminals inside your terminal. It's somewhat like having multiple browser tabs, but for your command line!
+- `screen` creates detachable terminal sessions you can detach and reattach to.
+- Detaching preserves running programs across disconnects or logouts.
+
+```bash
+# example:
+screen -S mysession    # start a named session
+screen -ls              # list sessions
+```
 
 ### References 
 None
 
 ## Detaching and Attaching
-Jobs and Sessions
+Detach sessions (`Ctrl-A d`) and reattach them later with `screen -r`.
 
 ### Solve
 **Flag:** `pwn.college{023tGGMpPPE1lClT6WvizaiE674.0lN4IDOxwyM3kjNzEzW}`
@@ -30,16 +37,19 @@ pwn.college{023tGGMpPPE1lClT6WvizaiE674.0lN4IDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Imagine you're working on something important over a remote connection, and your connection drops. With a normal terminal (outside of this awesome dojo environment), everything's gone
-- With screen, your work keeps running, and you can reattach later!
-- You detach by pressing Ctrl-A, followed by d (for detach). This leaves your session running in the background while you return to your normal termina
-- To reattach, you can use the -r argument to screen
+- Detach with `Ctrl-A d`; reattach with `screen -r` or `screen -r name`.
+- Named sessions (`-S`) make reattachment easy on multi-session hosts.
+
+```bash
+# reattach named session:
+screen -r mysession
+```
 
 ### References 
 None
 
-## Fidning Sessions
-Disowning Processes
+## Finding Sessions
+List and identify `screen` sessions with `screen -ls` and reattach by id or name.
 
 ### Solve
 **Flag:** `pwn.college{kwDJSyacyM-ank3K-sS4Ncrnqw_.01N4IDOxwyM3kjNzEzW}`
@@ -50,17 +60,23 @@ pwn.college{kwDJSyacyM-ank3K-sS4Ncrnqw_.01N4IDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- The identifiers of the sessions are the PID of each respective screen process, a dot, and the name of the screen session. To attach to a specific one, you use its name or its PID by giving it as an argument to screen -r.
-- In this challenge, we've created three screen sessions for you. One of them contains the flag. The other two are decoys!
+- `screen -ls` shows session IDs like `PID.name` you can pass to `screen -r`.
+- Use `screen -S name` to create, `screen -X` to send commands to sessions remotely.
+
+```bash
+# example:
+screen -ls
+screen -r 12345.mysession
+```
 
 ### References 
 None
 
 ## Switching Windows
-Foregrounding and Backgrounding
+Use screen's window controls (`Ctrl-A c`, `Ctrl-A n/p`, `Ctrl-A 0..9`) to manage multiple shells.
 
 ### Solve
-**Flag:** ` pwn.college{8XAfoZXJZEcgOtujjRziUc_LExj.0FO4IDOxwyM3kjNzEzW}`
+**Flag:** `pwn.college{8XAfoZXJZEcgOtujjRziUc_LExj.0FO4IDOxwyM3kjNzEzW}`
 
 ```bash
 command screen -ls
@@ -70,20 +86,18 @@ pwn.college{8XAfoZXJZEcgOtujjRziUc_LExj.0FO4IDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Inside a single screen session, you can have multiple windows, like your browser has multiple tabs. This can be super handy for organizing different tasks!
-- These windows are handled with different keyboard shortcuts, all starting with Ctrl-A:
-    - Ctrl-A c - Create a new window
-    - Ctrl-A n - Next window
-    - Ctrl-A p - Previous window
-    - Ctrl-A 0 through Ctrl-A 9 - Jump directly to window 0-9
-    - Ctrl-A " - bring up a selection menu of all of the windows
+- Create windows with `Ctrl-A c`, navigate with `Ctrl-A n`/`p` and jump to numbered windows with `Ctrl-A 0..9`.
+- Use `Ctrl-A "` to list windows and switch interactively.
 
+```bash
+# no direct bash example for key bindings; practice inside a screen session
+```
 
 ### References 
 None
 
-## Detaching And Attaching
-Suspending Jobs
+## Using tmux
+Create and manage detachable sessions with `tmux` (modern alternative to screen).
 
 ### Solve
 **Flag:** `pwn.college{I7W_jOUNHN05xBXQc9YBpipMdkx.0VO4IDOxwyM3kjNzEzW}`
@@ -96,16 +110,21 @@ pwn.college{I7W_jOUNHN05xBXQc9YBpipMdkx.0VO4IDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- tmux (terminal multiplexer) is screen's younger, more modern cousin. It does all the same things but with some different key bindings. The biggest difference? Instead of Ctrl-A, tmux uses Ctrl-B as its command prefix.
-- So to detach from tmux, you press Ctrl-B followed by d.
-- tmux ls - List sessions
-- tmux attach or tmux a - Reattach to session
+- `tmux` is a modern multiplexer with `Ctrl-B` prefix; create sessions with `tmux new -s name`.
+- Detach with `Ctrl-B d`, reattach with `tmux attach -t name` or `tmux a`.
+
+```bash
+# example:
+tmux new -s mysession
+tmux ls
+tmux attach -t mysession
+```
 
 ### References 
 None
 
-## Switching Windows
-Killing Processes
+## tmux Window Controls
+Use tmux's keybindings (`Ctrl-B c`, `Ctrl-B n/p`, `Ctrl-B w`) to create and navigate windows and panes.
 
 ### Solve
 **Flag:** `pwn.college{I7W_jOUNHN05xBXQc9YBpipMdkx.0VO4IDOxwyM3kjNzEzW}`
@@ -116,12 +135,10 @@ pwn.college{I7W_jOUNHN05xBXQc9YBpipMdkx.0VO4IDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Just like screen, tmux has windows. The key combos are different, but the concept is the same:
-    - Ctrl-B c - Create a new window
-    - Ctrl-B n - Next window
-    - Ctrl-B p - Previous window
-    - Ctrl-B 0 through Ctrl-B 9 - Jump to window 0-9
-    - Ctrl-B w - See a nice window picker
+- `Ctrl-B c` creates a new window; `Ctrl-B n`/`p` navigate; `Ctrl-B w` shows window list.
+- tmux panes let you split a window (`Ctrl-B %` vertical, `Ctrl-B "` horizontal) for side-by-side tasks.
 
-### References 
-None
+```bash
+# example:
+tmux a
+```

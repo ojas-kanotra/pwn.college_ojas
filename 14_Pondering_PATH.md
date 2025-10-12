@@ -9,7 +9,7 @@ Through a bare command name (e.g., ls).
 We know the absolute way or relative way of locating -- the first and second option however in the third one all the scritps are located in PATH
 
 ## The PATH Variable
-The PATH Variable
+PATH is a colon-separated list of directories the shell searches for commands invoked by name; clearing it makes bare names fail.
 
 ### Solve
 **Flag:** `pwn.college{8miN9eTLg4xAGhzTSythdMTC9i8.QX2cDM1wyM3kjNzEzW}`
@@ -21,22 +21,21 @@ pwn.college{8miN9eTLg4xAGhzTSythdMTC9i8.QX2cDM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- It turns out that the answer to "How does the shell find ls?" is fairly simple. There is a special shell variable, called PATH, that stores a bunch of directory paths in which the shell will search for programs corresponding to commands. If you blank out the variable, things go badly
+- **What PATH is**: PATH is a colon-separated list of directories the shell searches to find commands invoked by name.
+- **Effect of empty PATH**: clearing `PATH` makes bare command names unavailable (e.g., `ls` → "No such file or directory").
+- **Order matters**: the shell searches PATH entries left-to-right and uses the first matching executable.
+
 ```bash
-hacker@dojo:~$ ls
-Desktop    Downloads  Pictures  Templates
-Documents  Music      Public    Videos
-hacker@dojo:~$ PATH=""
-hacker@dojo:~$ ls
-bash: ls: No such file or directory
-hacker@dojo:~$
+# examples:
+echo $PATH
+PATH=""; which ls || echo not-found
 ```
 
 ### References 
 None
 
 ## Setting Path
-Local Binaries
+Temporarily prepend or export directories into `PATH` (e.g., `PATH=~/bin:$PATH; export PATH`) to call local scripts by name.
 
 ### Solve
 **Flag:** `pwn.college{MEB3crs9X3WAYAhayU7J7ntj3Xy.QX1cjM1wyM3kjNzEzW}`
@@ -48,20 +47,21 @@ pwn.college{MEB3crs9X3WAYAhayU7J7ntj3Xy.QX1cjM1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- PATH stores a list of directories to find commands in and, for commands in nonstandard places, we must typically execute them via their path
-- An example is adding goodscript to the PATH
+- **Modify PATH**: set `PATH=/some/dir:$PATH` (or temporarily `PATH=/some/dir command`) to include custom command locations.
+- **Local scripts**: adding `~/bin` or `/home/user/scripts` to PATH makes personal utilities callable by name.
+- **Security caution**: do not put `.` (current dir) at the front of PATH — it can enable accidental execution of malicious programs.
+
 ```bash
-hacker@dojo:~$ PATH=/home/hacker/scripts
-hacker@dojo:~$ goodscript
-YEAH! This is the best script!
-hacker@dojo:~$
+# examples:
+PATH=~/bin:$PATH
+export PATH
 ```
 
 ### References 
 None
 
 ## Finding Commands
-In this challenge, we added a win command somewhere in your $PATH, but it won't give you the flag. Instead, it's in the same directory as a flag file that we made readable by you
+Use `which` or `type -a` to locate the first executable matching a name and inspect whether it's an alias, builtin, or external program.
 
 ### Solve
 **Flag:** `pwn.college{YpmyNTx_qZdjnSZLPFyt_3E1ywh.01NzEzNxwyM3kjNzEzW}`
@@ -73,20 +73,21 @@ pwn.college{YpmyNTx_qZdjnSZLPFyt_3E1ywh.01NzEzNxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You can find out with the aptly-named which command:
-- Mirroring what the shell does when searching for commands, which looks at each directory in $PATH in order and prints the first file it finds whose name matches the argument you passed.
+- **which**: `which cmd` prints the path to the first matching executable found in PATH.
+- **how shell finds commands**: the shell searches each PATH directory in order for an executable file with the command name.
+- **Inspect before run**: use `which` or `type` to see whether a name is an alias, builtin, or external command.
+
+```bash
+# examples:
+which win
+type -a ls
+```
 
 ### References 
 None
 
 ## Adding Commands
-Hint: /challenge/run runs as root and will call win. Thus, win can simply cat the flag file. Again, the win command is the only thing that /challenge/run needs, so you can just overwrite PATH with that one directory. But remember, if you do that, your win command won't be able to find cat.
-
-You have three options to avoid that:
-
-- Figure out where the cat program is on the filesystem. It must be in a directory that lives in the PATH variable, so you can print the variable out (refer to Shell Variables to remember how!), and go through the directories in it (recall that the different entries are separated by :), find which one has cat in it, and invoke cat by its absolute path.
-- Set a PATH that has the old directories plus a new entry for wherever you create win.
-- Use read (again, refer to Shell Variables) to read /flag. Since read is a builtin functionality of bash, it is unaffected by PATH shenanigans.
+When adding a custom command directory to PATH, include system dirs or call system binaries by absolute path to avoid breaking required tools.
 
 ### Solve
 **Flag:** `pwn.college{4j4NuKlZyAAfGABToqtdi0MGT1e.QX2cjM1wyM3kjNzEzW}`
@@ -106,13 +107,20 @@ FLAG=$(</flag)
 read FLAG
 ' > win
 ### New Learnings
-Use of previous knowledge
+- **Builtins vs external**: shell builtins (like `read`) run without referencing PATH; external commands require PATH lookup.
+- **Safe PATH overrides**: include system directories in PATH when adding custom dirs, or invoke required system binaries by absolute path.
+- **Privilege note**: when programs run as another user (e.g., root), PATH and builtins behave according to that user's environment and shell.
+
+```bash
+# example:
+/bin/cat /flag    # invoke cat via absolute path when PATH is overridden
+```
 
 ### References 
 None
 
 ## Hijacking Commands
-The PATH Variable 2
+Placing an executable earlier in `PATH` can hijack common command names; prefer absolute paths for critical binaries and avoid '.' at the front of PATH.
 
 ### Solve
 **Flag:** `pwn.college{helloworld}`
@@ -124,7 +132,14 @@ pwn.college{helloworld}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- **Command hijacking**: placing a malicious executable earlier in PATH can cause innocent-looking commands to run your code—beware when modifying PATH.
+- **Defenses**: prefer full paths for critical binaries, avoid `.` in PATH, and check `which`/`type` before trusting a command.
+
+```bash
+# example:
+which ls
+type ls
+```
 
 ### References 
 None

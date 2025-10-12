@@ -1,7 +1,7 @@
 # Processes and Jobs
 
 ## Listing Processes
-The /challenge/run program is renamed and hidden from ls. Use ps to find its process and filename, then execute it to get the flag.
+Use `ps` (or `pgrep`) to locate running programs, inspect their PIDs and command lines to identify targets.
 
 ### Solve
 **Flag:** `pwn.college{IQdgPKPSMRYwD_vDb3cGIQT2Ktu.QX4MDO0wyM3kjNzEzW}`
@@ -13,25 +13,25 @@ pwn.college{IQdgPKPSMRYwD_vDb3cGIQT2Ktu.QX4MDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- To list running processes using the ps command
-- ps either stands for "process snapshot" or "process status", and it lists processes
-- ps just lists the processes running in your terminal, which honestly isn't very useful
-- We have PID, which is a number that uniquely identifies every running process in a Linux environment
-- We also see the total amount of cpu time that the process has eaten up so far
-- As ps is a very old utility, its usage is a bit of a mess. There are two ways to specify arguments.
-- "Standard" Syntax: in this syntax, you can use -e to list "every" process and -f for a "full format" output, including arguments. These can be combined into a single argument -ef.
-- "BSD" Syntax: in this syntax, you can use a to list processes for all users, x to list processes that aren't running in a terminal, and u for a "user-readable" output. These can be combined into a single argument aux.
-- These two methods, ps -ef and ps aux, result in slightly different, but cross-recognizable output
-- There are many commonalities between ps -ef and ps aux: both display the user (USER column), the PID, the TTY, the start time of the process (STIME/START), the total utilized CPU time (TIME), and the command (CMD/COMMAND)
-- ps -ef additionally outputs the Parent Process ID (PPID), which is the PID of the process that launched the one in question
-- ps aux outputs the percentage of total system CPU and Memory that the process is utilizing.
+- **ps overview**: `ps` shows running processes; use `ps aux` (BSD style) or `ps -ef` (UNIX style) to list system-wide processes.
+- **Key columns**: USER (owner), PID (process id), PPID (parent PID), TTY, STIME/START (start time), TIME (CPU time), CMD (command).
+- **Finding processes**: combine `ps` with `grep` (e.g., `ps aux | grep name`) or use `pgrep name` to get PIDs quickly.
+- **Resource view**: `ps aux` includes CPU% and MEM% columns for quick resource checks.
+- **PID actions**: use `kill PID` (SIGTERM) for graceful termination or `kill -9 PID` (SIGKILL) to force-stop.
 
+```bash
+# examples:
+ps aux | grep run
+pgrep -a run         # list matching processes and args
+kill 1234             # request graceful stop
+kill -9 1234          # force kill
+```
 
 ### References 
 None
 
 ## Killing Processes
-Kill the running /challenge/dont_run process to allow /challenge/run to execute and provide the flag.
+Terminate interfering processes with `kill` (prefer graceful first) to allow other commands to run.
 
 ### Solve
 **Flag:** `pwn.college{0tEXyNALA9uXh99u1OY9-s99IJG.QXyQDO0wyM3kjNzEzW}`
@@ -43,16 +43,20 @@ pwn.college{0tEXyNALA9uXh99u1OY9-s99IJG.QXyQDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You've launched processes, you've viewed processes, now you will learn to terminate processes
-- kill will terminate a process in a way that gives it a chance to get its affairs in order before ceasing to exist
-- You use kill to terminate it by passing the process identifier (the PID from ps) as an argument
-- `ps -e | grep sleep` to get the sleep from list of ps
+- **kill basics**: `kill PID` sends SIGTERM (graceful); `kill -9 PID` sends SIGKILL (forceful).
+- **Safe termination first**: prefer `kill` without `-9` so processes can clean up files and state.
+- **Discover PID**: find PID with `ps aux | grep pattern` or `pgrep name`.
+
+```bash
+# find and kill by name (example):
+pkill -f /challenge/dont_run
+```
 
 ### References 
 None
 
 ## Interrupting Processes
-Interrupt the /challenge/run process with Ctrl-C to make it output the flag.
+Send Ctrl-C (SIGINT) to interrupt a foreground job; some programs trap it to perform cleanup.
 
 ### Solve
 **Flag:** `pwn.college{gVVWCJhaODNLIk_s1LBFUjCoqiy.QXzQDO0wyM3kjNzEzW}`
@@ -64,14 +68,18 @@ pwn.college{gVVWCJhaODNLIk_s1LBFUjCoqiy.QXzQDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You've learned how to kill other processes with the kill command, but sometimes you just want to get rid of the process that's clogging up your terminal! 
-- Ctrl-C (e.g., holding down the Ctrl key and pressing C) sends an "interrupt" to whatever application is waiting on input from the terminal and, typically, this causes the application to cleanly exit.
+- **Ctrl-C (SIGINT)**: sends an interrupt to the foreground process; commonly terminates interactive programs.
+- **Graceful handling**: some programs trap SIGINT to perform cleanup—behavior varies by program.
+
+```bash
+# press Ctrl-C in the terminal to send SIGINT to the foreground job
+```
 
 ### References 
 None
 
 ## Killing Misbehaving Processes
-Kill the /challenge/decoy process to stop it from interfering, then run /challenge/run to get the flag.
+Identify and stop misbehaving daemons using `ps`, `top`, and `kill` to restore normal operation.
 
 ### Solve
 **Flag:** `pwn.college{o40pLxi8M52GaQKg0pNQucIsFIK.0FNzMDOxwyM3kjNzEzW}`
@@ -86,13 +94,19 @@ pwn.college{o40pLxi8M52GaQKg0pNQucIsFIK.0FNzMDOxwyM3kjNzEzW}
 ```
 
 ### New Learnings
-Brief note on what you learned from the challenge
+- **Practical debugging**: use `ps`, `pgrep`, `top`, and `htop` to inspect live processes and resource consumption.
+- **Terminate or suspend**: `kill`, Ctrl-C, and `kill -9` are tools to stop misbehaving processes; prefer graceful methods first.
+
+```bash
+# quick live view:
+top
+```
 
 ### References 
 None
 
 ## Suspending Processes
-Launch /challenge/run, suspend it with Ctrl-Z, then launch another instance while the first is suspended.
+Suspend the foreground job with Ctrl-Z to stop it without killing it, then manage it with `jobs`/`bg`/`fg`.
 
 ### Solve
 **Flag:** `pwn.college{Ibp9tzjyo4wKN3P1cdHabI1BbKO.QX1QDO0wyM3kjNzEzW}`
@@ -105,15 +119,23 @@ pwn.college{Ibp9tzjyo4wKN3P1cdHabI1BbKO.QX1QDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You have learned to interrupt processes with Ctrl-C, but there are less drastic measures you can use to get your terminal back! You can suspend processes to the background with Ctrl-Z
-- When you pressed Ctrl-Z, you suspended the first instance of /challenge/run, which paused its execution and returned control to the shell. At that point, the first process was still alive — just stopped in the background.
-- Then, when you ran /challenge/run a second time, two processes were now running in the same terminal session:
+- **Ctrl-Z (SIGTSTP)**: suspends the foreground job and returns control to the shell (job is stopped, not killed).
+- **Jobs and signals**: manage suspended/background jobs with `jobs`, `fg`, and `bg`.
+- **Job states**: S (sleeping), R (running), T (stopped); `ps` and `jobs` show differing views.
+
+```bash
+# suspend then background example:
+sleep 100
+# press Ctrl-Z, then:
+bg
+jobs
+```
 
 ### References 
 None
 
 ## Resuming Processes
-Suspend /challenge/run with Ctrl-Z, then resume it with fg to get the flag.
+Use `fg` to bring a stopped/backgrounded job back to the foreground for interaction.
 
 ### Solve
 **Flag:** `pwn.college{YXAkynr0YsL3FsUDy-dyfBp5frZ.QX2QDO0wyM3kjNzEzW}`
@@ -126,13 +148,19 @@ pwn.college{YXAkynr0YsL3FsUDy-dyfBp5frZ.QX2QDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Your shell provides the fg command, a builtin that takes the suspended process, resumes it, and puts it back in the foreground of your terminal.
+- **fg**: brings a stopped/backgrounded job to the foreground so it can receive input and signals.
+- **bg**: resumes a stopped job in the background so it continues running while you use the shell.
+
+```bash
+# bring job 1 to foreground:
+fg %1
+```
 
 ### References 
 None
 
 ## Backgrounding Processes
-Launch /challenge/run, suspend it, background it with bg, then launch another instance.
+Start a job in the background with `&` or move it there with `bg` to free the shell prompt.
 
 ### Solve
 **Flag:** `pwn.college{0Fi5p9ZHFN5zhQaX8TXQ8iRSKy0.QX3QDO0wyM3kjNzEzW}`
@@ -146,24 +174,22 @@ pwn.college{0Fi5p9ZHFN5zhQaX8TXQ8iRSKy0.QX3QDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You've resumed processes in the foreground with the fg command. You can also resume processes in the background with the bg command!
-- This will allow the process to keep running, while giving you your shell back to invoke more commands in the meantime.
+- **Background at start**: append `&` to run a job in the background immediately (e.g., `/challenge/run &`).
+- **Shell prompt returned**: backgrounding frees the shell for new commands while the job runs.
+- **Job control commands**: `jobs` lists current jobs; `fg %1` or `bg %1` operate on numbered jobs.
+- **STAT column decoding**: `T`=stopped, `S`=sleeping, `R`=running, `+`=foreground job in `ps`/`jobs` output.
 
-- To know the state we can run ps -o user,pid,stat,cmd
 ```bash
-USER         PID STAT CMD
-hacker       702 Ss   bash
-hacker       762 T    sleep 1337
-hacker       782 R+   ps -o user,pid,stat,cmd
+# start in background:
+/challenge/run &
+jobs
 ```
-- See that T? That means that the process is suspended due to our Ctrl-Z. The S in bash's STAT column means that bash is sleeping while waiting for input. The R in ps's column means that it's actively running, and the + means that it's in the foreground!
-- Now if we run bg our sleep which was suspended is shifted to background. Letter S will appear in STAT 
 
 ### References 
 None
 
 ## Foregrounding Processes
-Bring a backgrounded /challenge/run process to the foreground using fg.
+Use `fg` (with job id) to return a backgrounded job to the foreground for input and signals.
 
 ### Solve
 **Flag:** `pwn.college{MCOudR65AUmB9-6PavIA0XkBTMe.QX4QDO0wyM3kjNzEzW}`
@@ -178,13 +204,18 @@ pwn.college{MCOudR65AUmB9-6PavIA0XkBTMe.QX4QDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Imagine that you have a backgrounded process, and you want to mess with it some more. What do you do? Well, you can foreground a backgrounded process with fg just like you foreground a suspended process
+- **Bring back to foreground**: `fg` restores backgrounded processes for interaction; use job ids (e.g., `%1`) when multiple jobs exist.
+
+```bash
+# bring job 1 to foreground:
+fg %1
+```
 
 ### References 
 None
 
 ## Starting Backgrounded Processes
-Launch /challenge/run in the background using & to get the flag.
+Launch long-running tasks with `&` to run them concurrently while you continue working.
 
 ### Solve
 **Flag:** `pwn.college{87tq9HL5BmO1JwCho_rVpOgpoPP.QX5QDO0wyM3kjNzEzW}`
@@ -195,13 +226,19 @@ pwn.college{87tq9HL5BmO1JwCho_rVpOgpoPP.QX5QDO0wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- Of course, you don't have to suspend processes to background them: you can start them backgrounded right off the bat! It's easy; all you have to do is append & to the command
+- **Background at start**: append `&` to run a job in the background immediately (e.g., `/challenge/run &`).
+- **Shell prompt returned**: backgrounding frees the shell for new commands while the job runs.
+
+```bash
+# start in background:
+/challenge/run &
+```
 
 ### References 
 None
 
 ## Process Exit Codes
-Run /challenge/get-code to get its exit code, then pass that code to /challenge/submit-code as an argument.
+Check `$?` for the previous command's exit status to script behavior or pass the code to other tools.
 
 ### Solve
 **Flag:** `pwn.college{helloworld}`
@@ -214,7 +251,14 @@ pwn.college{sxyQLrmuJ5cTMCeuRdvpMeT9QSX.QX5YDO1wyM3kjNzEzW}
 ```
 
 ### New Learnings
-- You can access the exit code of the most recently-terminated command using the special ? variable (don't forget to prepend it with $ to read its value!)
+- **Exit codes**: `$?` holds the exit status of the last command (0 = success, non-zero = failure).
+- **Use cases**: check `$?` in scripts or use `&&`/`||` operators to branch on command success or failure.
+
+```bash
+# example:
+false; echo $?    # prints non-zero
+true; echo $?     # prints 0
+```
 
 ### References 
 None

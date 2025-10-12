@@ -1,30 +1,24 @@
-
 # Compact Linux Cheat-sheet: Real Examples & Forgotten Tips
-
-**arguments**
-Arguments are the inputs you provide to commands, separated by spaces. They tell the command what to act on or how to behave.
-Example: `ls -l /tmp` lists files in `/tmp` with details. Use quotes for arguments with spaces: `grep "hello world" file.txt`.
-Arguments can be filenames, options, or patterns, and are essential for customizing command behavior.
-
-**absolute-paths**
-Absolute paths begin with `/` and point to a location from the root of the filesystem, making them unambiguous.
-Example: `/usr/bin/python3` runs Python from anywhere, regardless of your current directory.
-Use absolute paths when you need to reference files or executables reliably across scripts and commands.
-
-**explicit-relative (./)**
-Explicit relative paths use `./` or `../` to specify files or executables relative to your current directory.
-Example: `./script.sh` runs a script in the current folder; `../program` accesses one level up.
-This avoids confusion with similarly named files elsewhere and ensures you run the intended file.
-
-**home (~)**
-The tilde `~` represents your home directory, a shortcut for user-specific files and folders.
-Example: `cd ~/Downloads` quickly navigates to your Downloads folder from anywhere.
-Useful for scripts and commands that need to work across different user accounts.
 
 **cd**
 `cd` changes your current working directory, letting you navigate the filesystem.
 Example: `cd /var/log` moves to system logs; `cd ..` goes up one level. `cd -` toggles between last two directories.
 Mastering `cd` is key for efficient movement and file management in the shell.
+
+- **Absolute-paths**
+    Absolute paths begin with `/` and point to a location from the root of the filesystem, making them unambiguous.
+    Example: `/usr/bin/python3` runs Python from anywhere, regardless of your current directory.
+    Use absolute paths when you need to reference files or executables reliably across scripts and commands.
+
+- **Explicit-relative (./)**
+    Explicit relative paths use `./` or `../` to specify files or executables relative to your current directory.
+    Example: `./script.sh` runs a script in the current folder; `../program` accesses one level up.
+    This avoids confusion with similarly named files elsewhere and ensures you run the intended file.
+
+- **Home (~)**
+    The tilde `~` represents your home directory, a shortcut for user-specific files and folders.
+    Example: `cd ~/Downloads` quickly navigates to your Downloads folder from anywhere.
+    Useful for scripts and commands that need to work across different user accounts.
 
 **ls**
 `ls` lists files and directories, with options to control format and sorting.
@@ -72,7 +66,7 @@ Example: `mkdir newdir` makes a single folder; `mkdir -p parent/child/grandchild
 Use for project setup, organizing files, or preparing directory structures in scripts.
 
 **find**
-`find` searches for files and directories based on name, type, size, and more, recursively.
+`find` searches for files and directories based on name, type, size, and more, recursively. `find /path/to/search -name "filename"`
 Example: `find . -name '*.log'` finds all log files; `find /tmp -type d` lists directories. Use `-exec` to run commands on results.
 Powerful for automation, cleanup, and locating files in large projects.
 
